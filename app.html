@@ -1,0 +1,102 @@
+<dom-module id="app-cont">
+	<template>
+    <style>
+
+    </style>
+    <div class="navbar-fixed">
+  		<nav>
+  			<span style="padding-left: 10px;">Integrated Refuse Solutions</span>
+  			<ul class="right hide-on-med-and-down section table-of-contents" style="padding:0px;height:100%">
+  				<li><a href="#trash">Trash</a>
+  				</li>
+  				<li><a href="#calendar">Calendar</a>
+  				</li>
+  				<li><a href="#payments">Payments</a>
+  				</li>
+  			</ul>
+  			<ul id="slide-out" class="side-nav section table-of-contents">
+  				<li><a href="#trash">Trash</a>
+  				</li>
+  				<li><a href="#calendar">Calendar</a>
+  				</li>
+  				<li><a href="#payments">Payments</a>
+  				</li>
+  			</ul>
+  			<a href="#" style="padding-left: 10px;" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+  		</nav>
+    </div>
+		<ul id="cards">
+			<li style="opacity: 0">
+				<div class="row">
+					<div class="col s8 push-s2">
+						<div class="card">
+							<div class="card-image section scrollspy" id="trash">
+								<img src="https://placehold.it/900x500.png/eee?text=Trash+Charts">
+							</div>
+							<div class="card-action">
+								<a href="#">This is a link</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li style="opacity: 0">
+				<div class="row">
+					<div class="col s8 push-s2">
+						<div class="card">
+							<div class="card-image section scrollspy" id="calendar">
+								<img src="https://placehold.it/900x500.png/eee?text=Calendar">
+							</div>
+							<div class="card-action">
+								<a href="#">This is a link</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+      <li style="opacity: 0">
+				<div class="row">
+					<div class="col s8 push-s2">
+						<div class="card">
+							<div class="card-image section scrollspy" id="payments">
+								<img src="https://placehold.it/900x500.png/eee?text=Payments">
+							</div>
+              <!--div class="card-content">
+                Most likely where you'll put this content
+              </div-->
+							<div class="card-action">
+								<a href="#">This is a link</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</template>
+	<script>
+		/* global Polymer History */
+		var $App;
+		Polymer({
+			is: "app-cont",
+			properties: {
+				spinner: {
+					type: Boolean,
+					observer: "_spinner"
+				}
+			},
+			_spinner: function() {
+				//enable & disable the spinner for loading
+			},
+			ready: function() {
+				$App = this;
+        $(function() {
+    			$(".button-collapse").sideNav();
+          $('.scrollspy').scrollSpy();
+          window.setTimeout(function(){
+            Materialize.showStaggeredList('#cards');
+          }, 500);
+    		})
+			}
+		});
+	</script>
+</dom-module>

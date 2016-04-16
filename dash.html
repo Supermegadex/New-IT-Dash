@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" ng-app>
+
+<head>
+	<title>Dashboard</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="/materialize/css/materialize.min.css">
+	<script src="/webcomponentsjs/webcomponents.js"></script>
+	<link href="/polymer/polymer.html" rel="import">
+	<script src="/js/jquery.js"></script>
+	<script src="https://browserstate.github.io/history.js/scripts/bundled/html4+html5/jquery.history.js"></script>
+	<link href="/app.html" rel="import">
+	<style>
+		.primary {
+			background-color: #ACFD7C !important;
+			color: rgba(38, 50, 56, .80) !important;
+		}
+		.accent {
+			background-color: #E2FD00 !important;
+			color: rgba(38, 50, 56, .80) !important;
+		}
+		story-box {
+			min-height: 100%;
+		}
+		hr {
+			border: 0;
+			height: 1px;
+			background-image: linear-gradient(to right, #E2FD00, #ACFD7C, #E2FD00);
+		}
+	</style>
+</head>
+
+<body class="blue-grey darken-1" onselect="sSelect()">
+	<app-cont></app-cont>
+
+	<script src="/materialize/js/materialize.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
+</body>
+
+</html>
