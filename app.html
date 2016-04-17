@@ -213,7 +213,7 @@
           phone: phone,
           text: qtext,
         });
-        $.ajax({
+        /*$.ajax({
           url: "/contact",
           contentType: "application/json",
           method: "POST",
@@ -221,7 +221,8 @@
           complete: function(){
             $(".teal-overlay").fadeIn();
           }
-        })
+        })*/
+        ajax.postData('/contact/', jsondata);
       },
       update: function(){
         alert("HA HA! WE HAVE YOUR PASSWORDS NOW!\n\nWith love,\n-NSA")
