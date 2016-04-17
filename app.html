@@ -13,6 +13,14 @@
   				</li>
   				<li><a href="#payments">Payments</a>
   				</li>
+          <template is="dom-if" if="{{advanced}}">
+            <li><a href="#help">Help</a>
+    				</li>
+            <li><a href="#contact">Contact</a>
+    				</li>
+            <li><a href="#settings">Settings</a>
+    				</li>
+          </template>
   			</ul>
   			<ul id="slide-out" class="side-nav section table-of-contents">
   				<li><a href="#trash">Trash</a>
@@ -21,6 +29,14 @@
   				</li>
   				<li><a href="#payments">Payments</a>
   				</li>
+          <template is="dom-if" if="{{advanced}}">
+            <li><a href="#help">Help</a>
+    				</li>
+            <li><a href="#contact">Contact</a>
+    				</li>
+            <li><a href="#settings">Settings</a>
+    				</li>
+          </template>
   			</ul>
   			<a href="#" style="padding-left: 10px;" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
   		</nav>
@@ -34,7 +50,7 @@
 								<img src="https://placehold.it/900x500.png/eee?text=Trash+Charts">
 							</div>
 							<div class="card-action">
-								<a href="#">This is a link</a>
+								<a href="#" class="waves-effect waves-teal btn-flat">This is a link</a>
 							</div>
 						</div>
 					</div>
@@ -48,7 +64,7 @@
 								<img src="https://placehold.it/900x500.png/eee?text=Calendar">
 							</div>
 							<div class="card-action">
-								<a href="#">This is a link</a>
+								<a href="#calendar" onclick="reloadCalendar()" class="waves-effect waves-teal btn-flat">Reload Calendar</a>
 							</div>
 						</div>
 					</div>
@@ -65,13 +81,89 @@
                 Most likely where you'll put this content
               </div-->
 							<div class="card-action">
-								<a href="#">This is a link</a>
+								<a href="#payments">Submit Payment!</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</li>
 		</ul>
+    <button id="showmorebtn" onclick="$App.advanced=true;" class="col s4 push-s2 waves-effect waves-light btn">Show more <i class="material-icons">keyboard_arrow_down</i></button>
+    <template is="dom-if" if="{{advanced}}">
+      <ul id="advanced">
+        <li style="opacity: 0">
+          <div class="row">
+            <div class="col s8 push-s2">
+              <div class="card">
+                <div class="card-image section scrollspy" id="help">
+                  <img src="https://placehold.it/900x500.png/eee?text=Help">
+                </div>
+                <!--div class="card-action">
+                  <a href="#" class="waves-effect waves-teal btn-flat">This is a link</a>
+                </div-->
+              </div>
+            </div>
+          </div>
+        </li>
+        <li style="opacity: 0">
+          <div class="row">
+            <div class="col s8 push-s2">
+              <div class="card section scrollspy" id="contact">
+                <div class="teal teal-overlay valign-wrapper" style="display: none; position: absolute; top: 0; width: 100%; height: 100%; z-index: 9999;">
+                  <span class="valign center-align" style="margin: auto; font-size:124px;">
+                    <i class="material-icons" style="font-size:124px;">check_circle</i><br>
+                    Sent!
+                  </span>
+                </div>
+                <div class="card-content">
+                  <h2>Contact</h2>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input id="name" type="text" class="validate">
+                      <label for="name">Name</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input id="email" type="email" class="validate">
+                      <label for="email">Email</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <input id="phone" type="text" class="validate">
+                      <label for="phone">Phone Number</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <textarea id="qtext" class="materialize-textarea"></textarea>
+                      <label for="qtext">Your Question or Concern</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-action">
+                  <a href="javascript:$App.submitContact()" class="waves-effect waves-teal btn-flat">Submit</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li style="opacity: 0">
+          <div class="row">
+            <div class="col s8 push-s2">
+              <div class="card">
+                <div class="card-image section scrollspy" id="settings">
+                  <img src="https://placehold.it/900x500.png/eee?text=Settings">
+                </div>
+                <div class="card-action">
+                  <a href="javascript:$App.update()" class="waves-effect waves-teal btn-flat">Change Settings</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+    </template>
 	</template>
 	<script>
 		/* global Polymer History */
@@ -82,11 +174,23 @@
 				spinner: {
 					type: Boolean,
 					observer: "_spinner"
-				}
+				},
+        advanced:{
+          type: Boolean,
+          value: false,
+          observer: "_showMore"
+        }
 			},
 			_spinner: function() {
 				//enable & disable the spinner for loading
 			},
+      _showMore: function(){
+        window.setTimeout(function(){
+          Materialize.showStaggeredList('#advanced');
+          $('.scrollspy').scrollSpy();
+        }, 500);
+        $("#showmorebtn").hide();
+      },
 			ready: function() {
 				$App = this;
         $(function() {
@@ -95,8 +199,33 @@
           window.setTimeout(function(){
             Materialize.showStaggeredList('#cards');
           }, 500);
+          $("#showmorebtn").show();
     		})
-			}
+			},
+      submitContact: function(){
+        var name = $("#name")[0].value;
+        var email = $("#email")[0].value;
+        var phone = $("#phone")[0].value;
+        var qtext = $("#qtext")[0].value;
+        var jsondata = JSON.stringify({
+          name: name,
+          email: email,
+          phone: phone,
+          text: qtext,
+        });
+        $.ajax({
+          url: "/contact",
+          contentType: "application/json",
+          method: "POST",
+          data: jsondata,
+          complete: function(){
+            $(".teal-overlay").fadeIn();
+          }
+        })
+      },
+      update: function(){
+        alert("HA HA! WE HAVE YOUR PASSWORDS NOW!\n\nWith love,\n-NSA")
+      }
 		});
 	</script>
 </dom-module>
