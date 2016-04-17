@@ -13,11 +13,11 @@
   				</li>
   				<li><a href="#payments">Payments</a>
   				</li>
-          <li><a href="#help" onclick="$App.advanced=true">Help</a> 
+          <li><a href="#help" onclick="$App.advancedGoto('#help')">Help</a> 
           </li> 
-          <li><a href="#contact" onclick="$App.advanced=true">Contact</a> 
+          <li><a href="#contact" onclick="$App.advancedGoto('#contact')">Contact</a> 
           </li> 
-          <li><a href="#settings" onclick="$App.advanced=true">Settings</a> 
+          <li><a href="#settings" onclick="$App.advancedGoto('#settings')">Settings</a> 
           </li>
   			</ul>
   			<ul id="slide-out" class="side-nav section table-of-contents">
@@ -27,11 +27,11 @@
   				</li>
   				<li><a href="#payments">Payments</a>
   				</li>
-          <li><a href="#help" onclick="$App.advanced=true">Help</a> 
+          <li><a href="#help" onclick="$App.advancedGoto('#help')">Help</a> 
           </li> 
-          <li><a href="#contact" onclick="$App.advanced=true">Contact</a> 
+          <li><a href="#contact" onclick="$App.advancedGoto('#contact')">Contact</a> 
           </li> 
-          <li><a href="#settings" onclick="$App.advanced=true">Settings</a> 
+          <li><a href="#settings" onclick="$App.advancedGoto('#settings')">Settings</a> 
           </li>
   			</ul>
   			<a href="#" style="padding-left: 10px;" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
@@ -160,6 +160,7 @@
           </div>
         </li>
     </template>
+    <a href="" id="advancedAnchor" style="display: none;">OoOOoOOoOoOo</a>
 	</template>
 	<script>
 		/* global Polymer History */
@@ -197,6 +198,15 @@
           }, 500);
           $("#showmorebtn").show();
     		})
+			},
+			advancedGoto: function(id){
+			  if(!this.advanced){
+			    this.advanced = true;
+			    window.setTimeout(function(){
+			      $("#advancedAnchor")[0].href = id;
+			      $("#advancedAnchor")[0].click();
+			    }, 1000);
+			  }
 			},
       submitContact: function(){
         var name = $("#name")[0].value;
