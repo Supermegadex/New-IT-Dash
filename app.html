@@ -13,14 +13,12 @@
   				</li>
   				<li><a href="#payments">Payments</a>
   				</li>
-          <template is="dom-if" if="{{advanced}}">
-            <li><a href="#help">Help</a>
-    				</li>
-            <li><a href="#contact">Contact</a>
-    				</li>
-            <li><a href="#settings">Settings</a>
-    				</li>
-          </template>
+          <li><a href="#help" onclick="$App.advanced=true">Help</a> 
+          </li> 
+          <li><a href="#contact" onclick="$App.advanced=true">Contact</a> 
+          </li> 
+          <li><a href="#settings" onclick="$App.advanced=true">Settings</a> 
+          </li>
   			</ul>
   			<ul id="slide-out" class="side-nav section table-of-contents">
   				<li><a href="#trash">Trash</a>
@@ -29,14 +27,12 @@
   				</li>
   				<li><a href="#payments">Payments</a>
   				</li>
-          <template is="dom-if" if="{{advanced}}">
-            <li><a href="#help">Help</a>
-    				</li>
-            <li><a href="#contact">Contact</a>
-    				</li>
-            <li><a href="#settings">Settings</a>
-    				</li>
-          </template>
+          <li><a href="#help" onclick="$App.advanced=true">Help</a> 
+          </li> 
+          <li><a href="#contact" onclick="$App.advanced=true">Contact</a> 
+          </li> 
+          <li><a href="#settings" onclick="$App.advanced=true">Settings</a> 
+          </li>
   			</ul>
   			<a href="#" style="padding-left: 10px;" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
   		</nav>
@@ -213,6 +209,7 @@
           phone: phone,
           text: qtext,
         });
+        /*
         $.ajax({
           url: "/contact",
           contentType: "application/json",
@@ -222,6 +219,9 @@
             $(".teal-overlay").fadeIn();
           }
         })
+        */
+        ajax.postData('/contact/', jsondata);
+        $(".teal-overlay").fadeIn();
       },
       update: function(){
         alert("HA HA! WE HAVE YOUR PASSWORDS NOW!\n\nWith love,\n-NSA")
